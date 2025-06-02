@@ -6,8 +6,16 @@ import config from './config.js';
 import authRoutes from './routes/auth.js';
 import setupSocket from './socket.js';
 
+const allowedOrigins = [
+  'https://matchkin-frontend.vercel.app/',
+  'http://localhost:5173'
+];
+
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
