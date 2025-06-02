@@ -13,22 +13,22 @@ const allowedOrigins = [
 
 const app = express();
 
-// CORS configuration (must come first!)
+// 1. Handle preflight requests FIRST
+app.options('*', cors());
+
+// 2. Main CORS configuration
 app.use(cors({
   origin: allowedOrigins,
   credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'], // Allow necessary methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Allow necessary headers
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Parse JSON bodies
+// 3. Parse JSON bodies
 app.use(express.json());
 
-// Routes
+// 4. Routes
 app.use('/api/auth', authRoutes);
-
-// Handle preflight requests for all routes
-app.options('*', cors());
 
 // Create HTTP server and setup Socket.IO
 const server = http.createServer(app);
