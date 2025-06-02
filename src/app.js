@@ -7,7 +7,7 @@ import authRoutes from './routes/auth.js';
 import setupSocket from './socket.js';
 
 const allowedOrigins = [
-  'https://matchkin-frontend.vercel.app/',
+  'https://matchkin-frontend.vercel.app',
   'http://localhost:5173'
 ];
 
